@@ -21,6 +21,10 @@ const GaushalaSchema = new Schema(
       type: Number,
       required: true,
     },
+    description: {
+      type: String,
+      required: false,
+    },
 
     upiQrImage: {
       type: String,
@@ -49,6 +53,15 @@ const GaushalaSchema = new Schema(
       type: String,
       required: true,
     },
+
+    donations: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Donation",
+        required: true,
+        default: [],
+      },
+    ],
   },
   { timestamps: { createdAt: true } }
 );

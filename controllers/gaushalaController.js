@@ -59,16 +59,18 @@ const getGaushala = async (req, res) => {
 const donateToGaushala = async (req, res) => {
   try {
     const donationObject = req.body;
-
     const donation = new Donation(donationObject);
     const savedDonation = await donation.save();
-    const gaushala = await Gaushala.find({ _id: req.params.id }).lean();
+    const gaushala = await Gaushala.findOne({ _id: req.params.id });
+    gaushala.donations.push(savedDonation._id);
+    await gaushala.save();
     res.status(200).json({
       status: "success",
       message: "Donated to gaushala successfully",
       data: null,
     });
   } catch (err) {
+    console.log(err);
     res.status(500).json({
       status: "error",
       message: err.message,

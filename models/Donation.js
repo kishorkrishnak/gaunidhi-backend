@@ -8,7 +8,11 @@ const DonationSchema = new Schema(
       type: String,
       required: true,
     },
-
+    gaushala: {
+      type: Schema.Types.ObjectId,
+      ref: "Gaushala",
+      required: true,
+    },
     phone: {
       type: String,
       required: true,
