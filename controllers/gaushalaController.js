@@ -1,3 +1,4 @@
+const Donation = require("../models/Donation");
 const Gaushala = require("../models/Gaushala");
 
 require("../config/dbConnect");
@@ -37,29 +38,48 @@ const getAllGaushalas = async (req, res) => {
   }
 };
 
-const getStoryById = async (req, res) => {
+const getGaushala = async (req, res) => {
   try {
-    const storyId = req.params.id;
-    const story = await Story.findOne({ _id: storyId })
-      .populate("author")
-      .populate({
-        path: "comments",
-        populate: {
-          path: "author",
-          model: "User",
-        },
-      });
+    const gaushala = await Gaushala.find({ _id: req.params.id }).lean();
 
     res.status(200).json({
       status: "success",
-      data: story,
+      message: "Gaushala retrieved successfully",
+      data: gaushala,
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: "error",
+      message: err.message,
+      data: null,
+    });
+  }
+};
+
+const donateToGaushala = async (req, res) => {
+  try {
+    const donationObject = req.body;
+
+    const donation = new Donation(donationObject);
+    const savedDonation = await donation.save();
+    const gaushala = await Gaushala.find({ _id: req.params.id }).lean();
+    res.status(200).json({
+      status: "success",
+      message: "Donated to gaushala successfully",
+      data: null,
     });
   } catch (err) {
-    res.status(500).json({ status: "error", message: err.message });
+    res.status(500).json({
+      status: "error",
+      message: err.message,
+      data: null,
+    });
   }
 };
 
 module.exports = {
   getAllGaushalas,
   addGaushala,
+  getGaushala,
+  donateToGaushala,
 };

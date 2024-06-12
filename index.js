@@ -6,7 +6,7 @@ const gaushalaRoutes = require("./routes/gaushalaRoutes.js");
 
 const app = express();
 
-const PORT = process.env.PORT ;
+const PORT = process.env.PORT;
 
 app.use(express.json());
 app.use(
@@ -15,7 +15,7 @@ app.use(
   })
 );
 
-app.use("/api/gaushala", gaushalaRoutes);
+app.use("/api/gaushalas", gaushalaRoutes);
 
 app.listen(PORT, (error) => {
   if (!error)

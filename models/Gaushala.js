@@ -8,6 +8,10 @@ const GaushalaSchema = new Schema(
       type: String,
       required: true,
     },
+    thumbnailImages: {
+      type: [String],
+      required: true,
+    },
     location: {
       type: String,
       required: true,
