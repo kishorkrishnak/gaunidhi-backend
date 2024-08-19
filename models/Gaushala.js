@@ -1,7 +1,6 @@
-const mongoose = require("mongoose");
+import mongoose from 'mongoose';
 
 const { Schema } = mongoose;
-
 const GaushalaSchema = new Schema(
   {
     name: {
@@ -66,5 +65,5 @@ const GaushalaSchema = new Schema(
   { timestamps: { createdAt: true } }
 );
 
-const Gaushala = mongoose.model("Gaushala", GaushalaSchema);
-module.exports = Gaushala;
+const Gaushala = mongoose.model('Gaushala', GaushalaSchema);
+export default Gaushala;

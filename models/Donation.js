@@ -1,7 +1,6 @@
-const mongoose = require("mongoose");
+import mongoose from 'mongoose';
 
 const { Schema } = mongoose;
-
 const DonationSchema = new Schema(
   {
     donorName: {
@@ -28,6 +27,5 @@ const DonationSchema = new Schema(
   },
   { timestamps: { createdAt: true } }
 );
-
-const Donation = mongoose.model("Donation", DonationSchema);
-module.exports = Donation;
+const Donation = mongoose.model('Donation', DonationSchema);
+export default Donation;

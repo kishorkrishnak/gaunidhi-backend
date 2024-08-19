@@ -1,9 +1,8 @@
-const Donation = require("../models/Donation");
-const Gaushala = require("../models/Gaushala");
+import Donation from "../models/Donation.js";
+import Gaushala from "../models/Gaushala.js";
+// import "../config/dbConnect.js";
 
-require("../config/dbConnect");
-
-const addGaushala = async (req, res) => {
+export const addGaushala = async (req, res) => {
   try {
     const newGaushala = new Gaushala(req.body);
     const savedGaushala = await newGaushala.save();
@@ -20,7 +19,7 @@ const addGaushala = async (req, res) => {
   }
 };
 
-const getAllGaushalas = async (req, res) => {
+export const getAllGaushalas = async (req, res) => {
   try {
     const gaushalas = await Gaushala.find({}).lean();
 
@@ -38,7 +37,7 @@ const getAllGaushalas = async (req, res) => {
   }
 };
 
-const getGaushala = async (req, res) => {
+export const getGaushala = async (req, res) => {
   try {
     const gaushala = await Gaushala.find({ _id: req.params.id }).lean();
 
@@ -56,7 +55,7 @@ const getGaushala = async (req, res) => {
   }
 };
 
-const donateToGaushala = async (req, res) => {
+export const donateToGaushala = async (req, res) => {
   try {
     const donationObject = req.body;
     const donation = new Donation(donationObject);
@@ -77,11 +76,4 @@ const donateToGaushala = async (req, res) => {
       data: null,
     });
   }
-};
-
-module.exports = {
-  getAllGaushalas,
-  addGaushala,
-  getGaushala,
-  donateToGaushala,
 };
