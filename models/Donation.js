@@ -1,15 +1,16 @@
 import mongoose from 'mongoose';
 
 const { Schema } = mongoose;
+
 const DonationSchema = new Schema(
   {
-    donorName: {
+    name: {
       type: String,
       required: true,
     },
-    gaushala: {
+    patient: {
       type: Schema.Types.ObjectId,
-      ref: "Gaushala",
+      ref: "Patient",
       required: true,
     },
     phone: {
@@ -27,5 +28,6 @@ const DonationSchema = new Schema(
   },
   { timestamps: { createdAt: true } }
 );
+
 const Donation = mongoose.model('Donation', DonationSchema);
 export default Donation;

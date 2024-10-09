@@ -1,15 +1,14 @@
 import Donation from "../models/Donation.js";
-import Gaushala from "../models/Gaushala.js";
-// import "../config/dbConnect.js";
+import Patient from "../models/Patient.js";
 
-export const addGaushala = async (req, res) => {
+export const addPatient = async (req, res) => {
   try {
-    const newGaushala = new Gaushala(req.body);
-    const savedGaushala = await newGaushala.save();
+    const newPatient = new Patient(req.body);
+    const savedPatient = await newPatient.save();
     res.status(201).json({
       status: "success",
-      message: "Gaushala created successfully",
-      data: savedGaushala,
+      message: "Patient created successfully",
+      data: savedPatient,
     });
   } catch (err) {
     res.status(500).json({
@@ -19,14 +18,14 @@ export const addGaushala = async (req, res) => {
   }
 };
 
-export const getAllGaushalas = async (req, res) => {
+export const getAllPatients = async (req, res) => {
   try {
-    const gaushalas = await Gaushala.find({}).lean();
+    const patients = await Patient.find({}).lean();
 
     res.status(200).json({
       status: "success",
-      message: "All gaushalas retrieved successfully",
-      data: gaushalas,
+      message: "All patients retrieved successfully",
+      data: patients,
     });
   } catch (error) {
     res.status(500).json({
@@ -37,14 +36,14 @@ export const getAllGaushalas = async (req, res) => {
   }
 };
 
-export const getGaushala = async (req, res) => {
+export const getPatient = async (req, res) => {
   try {
-    const gaushala = await Gaushala.find({ _id: req.params.id }).lean();
+    const patient = await Patient.find({ _id: req.params.id }).lean();
 
     res.status(200).json({
       status: "success",
-      message: "Gaushala retrieved successfully",
-      data: gaushala,
+      message: "Patient retrieved successfully",
+      data: patient,
     });
   } catch (error) {
     res.status(500).json({
@@ -55,17 +54,14 @@ export const getGaushala = async (req, res) => {
   }
 };
 
-export const donateToGaushala = async (req, res) => {
+export const donateToPatient = async (req, res) => {
   try {
     const donationObject = req.body;
     const donation = new Donation(donationObject);
     const savedDonation = await donation.save();
-    const gaushala = await Gaushala.findOne({ _id: req.params.id });
-    gaushala.donations.push(savedDonation._id);
-    await gaushala.save();
     res.status(200).json({
       status: "success",
-      message: "Donated to gaushala successfully",
+      message: "Donated to patient successfully",
       data: null,
     });
   } catch (err) {

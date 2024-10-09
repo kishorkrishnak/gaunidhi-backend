@@ -1,19 +1,19 @@
-import AdminJS from "adminjs";
 import AdminJSExpress from "@adminjs/express";
 import * as AdminJSMongoose from "@adminjs/mongoose";
+import AdminJS from "adminjs";
 
-import express from "express";
 import cors from "cors";
-import gaushalaRoutes from "./routes/gaushalaRoutes.js";
-import Donation from "./models/Donation.js";
-import Gaushala from "./models/Gaushala.js";
+import express from "express";
 import mongoose from "mongoose";
+import Donation from "./models/Donation.js";
+import Patient from "./models/Patient.js";
+import patientRoutes from "./routes/patientRoutes.js";
 
 import dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 5000; 
+const PORT = process.env.PORT || 5000;
 
 AdminJS.registerAdapter({
   Resource: AdminJSMongoose.Resource,
@@ -22,7 +22,7 @@ AdminJS.registerAdapter({
 
 const start = async () => {
   const adminOptions = {
-    resources: [Donation, Gaushala],
+    resources: [Donation, Patient],
   };
 
   const admin = new AdminJS(adminOptions);
@@ -44,7 +44,7 @@ app.use(
   })
 );
 
-app.use("/api/gaushalas", gaushalaRoutes);
+app.use("/api/patients", patientRoutes);
 
 app.listen(PORT, (error) => {
   if (!error) {

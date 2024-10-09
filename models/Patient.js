@@ -1,9 +1,13 @@
-import mongoose from 'mongoose';
-
+import mongoose from "mongoose";
 const { Schema } = mongoose;
-const GaushalaSchema = new Schema(
+
+const PatientSchema = new Schema(
   {
     name: {
+      type: String,
+      required: true,
+    },
+    phone: {
       type: String,
       required: true,
     },
@@ -11,30 +15,35 @@ const GaushalaSchema = new Schema(
       type: [String],
       required: true,
     },
-    location: {
+    address: {
       type: String,
       required: true,
     },
 
-    noOfCows: {
-      type: Number,
+    disease: {
+      type: String,
       required: true,
     },
     description: {
       type: String,
       required: false,
     },
-
+    amountRequired: {
+      type: Number,
+      required: true,
+    },
+    amountRaised: {
+      type: Number,
+      required: true,
+    },
     upiQrImage: {
       type: String,
       required: true,
     },
-
     upiMobileNumber: {
       type: String,
       required: true,
     },
-
     bankAccountHolder: {
       type: String,
       required: true,
@@ -52,18 +61,9 @@ const GaushalaSchema = new Schema(
       type: String,
       required: true,
     },
-
-    donations: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Donation",
-        required: true,
-        default: [],
-      },
-    ],
   },
   { timestamps: { createdAt: true } }
 );
 
-const Gaushala = mongoose.model('Gaushala', GaushalaSchema);
-export default Gaushala;
+const Patient = mongoose.model("Patient", PatientSchema);
+export default Patient;
