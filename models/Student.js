@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 const { Schema } = mongoose;
 
-const PatientSchema = new Schema(
+const StudentSchema = new Schema(
   {
     name: {
       type: String,
@@ -20,11 +20,10 @@ const PatientSchema = new Schema(
       required: true,
     },
 
-    disease: {
+    qualification: {
       type: String,
       required: true,
     },
-    
     description: {
       type: String,
       required: false,
@@ -70,5 +69,5 @@ const PatientSchema = new Schema(
   { timestamps: { createdAt: true } }
 );
 
-const Patient = mongoose.model("Patient", PatientSchema);
-export default Patient;
+const Student = mongoose.model("Student", StudentSchema);
+export default Student;

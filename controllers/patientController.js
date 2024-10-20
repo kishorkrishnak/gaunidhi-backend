@@ -1,5 +1,5 @@
-import Donation from "../models/Donation.js";
 import Patient from "../models/Patient.js";
+import Donation from "../models/PatientDonation.js";
 
 export const addPatient = async (req, res) => {
   try {
@@ -73,3 +73,4 @@ export const donateToPatient = async (req, res) => {
     });
   }
 };
+

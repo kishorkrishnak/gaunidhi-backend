@@ -5,9 +5,15 @@ import AdminJS from "adminjs";
 import cors from "cors";
 import express from "express";
 import mongoose from "mongoose";
-import Donation from "./models/Donation.js";
+import Message from "./models/Message.js";
 import Patient from "./models/Patient.js";
+import Donation from "./models/PatientDonation.js";
+import Student from "./models/Student.js";
+import StudentDonation from "./models/StudentDonation.js";
+
 import patientRoutes from "./routes/patientRoutes.js";
+import studentRoutes from "./routes/studentRoutes.js";
+import messageRoutes from "./routes/messageRoutes.js";
 
 import dotenv from "dotenv";
 dotenv.config();
@@ -22,7 +28,7 @@ AdminJS.registerAdapter({
 
 const start = async () => {
   const adminOptions = {
-    resources: [Donation, Patient],
+    resources: [Donation, StudentDonation, Patient, Message, Student],
   };
 
   const admin = new AdminJS(adminOptions);
@@ -44,7 +50,12 @@ app.use(
   })
 );
 
+
+
+
 app.use("/api/patients", patientRoutes);
+app.use("/api/students", studentRoutes);
+app.use("/api/message", messageRoutes);
 
 app.listen(PORT, (error) => {
   if (!error) {

@@ -1,16 +1,16 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const { Schema } = mongoose;
 
-const DonationSchema = new Schema(
+const StudentDonationSchema = new Schema(
   {
     name: {
       type: String,
       required: true,
     },
-    patient: {
+    student: {
       type: Schema.Types.ObjectId,
-      ref: "Patient",
+      ref: "Student",
       required: true,
     },
     phone: {
@@ -29,5 +29,8 @@ const DonationSchema = new Schema(
   { timestamps: { createdAt: true } }
 );
 
-const Donation = mongoose.model('Donation', DonationSchema);
-export default Donation;
+const StudentDonation = mongoose.model(
+  "StudentDonation",
+  StudentDonationSchema
+);
+export default StudentDonation;
