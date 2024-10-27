@@ -20,7 +20,7 @@ export const addPatient = async (req, res) => {
 
 export const getAllPatients = async (req, res) => {
   try {
-    const patients = await Patient.find({}).lean();
+    const patients = await Patient.find({active:true}).lean();
 
     res.status(200).json({
       status: "success",
@@ -38,17 +38,17 @@ export const getAllPatients = async (req, res) => {
 
 export const getPatient = async (req, res) => {
   try {
-    const patient = await Patient.find({ _id: req.params.id }).lean();
-
+    const patient = await Patient.findOne({ _id: req.params.id }).lean();
     res.status(200).json({
       status: "success",
       message: "Patient retrieved successfully",
       data: patient,
     });
   } catch (error) {
+    console.error(error);
     res.status(500).json({
       status: "error",
-      message: err.message,
+      message: error.message,
       data: null,
     });
   }
@@ -58,7 +58,7 @@ export const donateToPatient = async (req, res) => {
   try {
     const donationObject = req.body;
     const donation = new Donation(donationObject);
-    const savedDonation = await donation.save();
+    await donation.save();
     res.status(200).json({
       status: "success",
       message: "Donated to patient successfully",
@@ -73,4 +73,3 @@ export const donateToPatient = async (req, res) => {
     });
   }
 };
-

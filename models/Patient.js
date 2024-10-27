@@ -7,12 +7,24 @@ const PatientSchema = new Schema(
       type: String,
       required: true,
     },
+    age: {
+      type: Number,
+      required: false,
+    },
     phone: {
       type: String,
       required: true,
     },
     thumbnailImages: {
       type: [String],
+      required: true,
+    },
+    proofs: {
+      type: [String],
+    },
+
+    hospitalName: {
+      type: String,
       required: true,
     },
     address: {
@@ -24,9 +36,13 @@ const PatientSchema = new Schema(
       type: String,
       required: true,
     },
-    
+
     description: {
       type: String,
+      required: false,
+    },
+    daysLeft: {
+      type: Number,
       required: false,
     },
     amountRequired: {
@@ -37,7 +53,16 @@ const PatientSchema = new Schema(
       type: Number,
       required: true,
     },
+
+    donationCount: {
+      type: Number,
+      required: true,
+    },
     upiQrImage: {
+      type: String,
+      required: true,
+    },
+    upiLink: {
       type: String,
       required: true,
     },
